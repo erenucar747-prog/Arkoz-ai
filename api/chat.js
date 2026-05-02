@@ -494,9 +494,31 @@ export default async function handler(req, res) {
   maybeGc(dayHits, DAY);
 
   const body = req.body || {};
-  const messages = body.messages;
+  let messages = body.messages;
 
   if (!Array.isArray(messages) || messages.length === 0) {
+    return res.status(400).json({ error: 'Geçersiz istek.' });
+  }
+
+  // Backward-compat: cache'li eski widget'lar SYSTEM prompt'u fake user mesajı
+  // olarak yolluyor. Bu mesajları + onun cevabı olan fake assistant mesajını
+  // sessizce filtrele ki eski tarayıcılar da çalışsın.
+  messages = messages.filter((m, i, arr) => {
+    if (!m || typeof m.content !== 'string') return true;
+    if (m.role === 'user' && m.content.startsWith('[SISTEM TALIMATLARI')) return false;
+    if (
+      m.role === 'assistant' &&
+      i > 0 &&
+      arr[i - 1] &&
+      typeof arr[i - 1].content === 'string' &&
+      arr[i - 1].content.startsWith('[SISTEM TALIMATLARI')
+    ) {
+      return false;
+    }
+    return true;
+  });
+
+  if (messages.length === 0) {
     return res.status(400).json({ error: 'Geçersiz istek.' });
   }
   if (messages.length > MAX_HISTORY) {
