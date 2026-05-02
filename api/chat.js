@@ -453,7 +453,7 @@ YANIT ÜRETİM KURALLARI
   - Önemli vurguları **kalın** yaz
   - Teknik veri istendiğinde tablo ver
   - Kısa, net, profesyonel
-  - Emoji KULLANMA
+  - EMOJİ KULLANIMI KESİNLİKLE YASAKTIR. Hiçbir yerde, hiçbir koşulda, hiçbir mesajında emoji (😊, 👍, ✅, 🎉, ☎️, 📞, 📧, vb. dahil tüm emoji ve süslü Unicode karakterler) kullanma. Tek bir emoji bile profesyonelliği bozar; sadece düz metin, madde işareti (•), Latin alfabesi karakterleri ve kalın/eğik vurguları kullan
   - Görsel paylaşmak için: ![açıklama](URL) — sadece arkozgazbeton.com.tr veya alt domainleri
   - Link paylaşmak için: [metin](URL)
 
@@ -528,7 +528,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 600,
+        max_tokens: 1024,
         system: [
           {
             type: 'text',
