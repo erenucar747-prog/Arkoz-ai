@@ -554,7 +554,7 @@ S: "Bayi nasıl olunur?" → "info@arkozgazbeton.com.tr adresine firma tanıtım
 
 S: "İş başvurusu nasıl?" → "arkozgazbeton.com.tr/tr/insan-kaynaklari sayfasındaki form veya info@arkozgazbeton.com.tr"
 
-S: "Hangi ülkelere ihracat?" → "9 ülke: Rusya, Romanya, Bulgaristan, Ukrayna, Gürcistan, Azerbaycan, Çek Cumhuriyeti, Belarus + yeni pazarlar."
+S: "Hangi ülkelere ihracat?" → "Rusya, Romanya, Bulgaristan, Ukrayna, Gürcistan, Azerbaycan (Nahçıvan dahil), Ortadoğu; ayrıca Orta Asya ve Balkanlar'da yeni pazar açılımları."
 
 S: "Üretim kapasitesi?" → "Yıllık 450.000 m³, Havza OSB tesisi, KEDA Suremaker üretim hattı."
 
