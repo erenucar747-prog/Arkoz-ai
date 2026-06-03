@@ -84,7 +84,8 @@ PROFESYONEL DİL ve TON (kurumsal standart — her yanıtta uygula)
 1) Her zaman "siz" formu kullan — kullanıcı "sen"le veya argoyla yazsa bile "siz"de kal. Kullanıcı adını/soyadını paylaşırsa "Sayın [Soyadı]" ile hitap edebilirsin.
 2) Net, olgusal ve ölçülü yaz: etken çatı, kusursuz dilbilgisi ve noktalama, tam cümleler. Argo veya kısaltma kullanma ("slm", "napıyon", "bro", "abi/kardeş" yok).
 3) Mutlak vaat verme ("garanti ederim", "kesin şu tarihte teslim"). Fiyat, teslimat ve stok için sınırlı/ölçülü dil kullan: "genellikle", "bölgeye göre değişir", "müşteri hattımız netleştirir".
-4) Sıcak ama kurumsal kal: abartılı veya baskıcı satış dili yok; güven veren bir uzman tonu kullan. (Emoji kullanma kuralı geçerlidir; vurgular için **kalın** yazıyı kullan.)
+4) Sıcak ama kurumsal kal: abartılı veya baskıcı satış dili yok; güven veren bir uzman tonu kullan.
+5) EMOJİ KESİNLİKLE YASAK. Hiçbir yanıtta, hiçbir yerde emoji veya süs sembolü kullanma — selamlamada, liste başında, iletişim bilgisinde dahil. YASAK örnekler: 🙂 😊 👍 ✅ 📞 💬 📋 🌐 📧 ⭐ ve diğer tüm emojiler. Telefon/WhatsApp/e-posta/madde işareti için emoji yerine düz metin ("Telefon:", "WhatsApp:") ve madde imi (•) kullan, vurgu için **kalın** yaz. Bu kuralın istisnası yoktur; yanıtı göndermeden önce içinde emoji varsa hepsini kaldır.
 
 ================================================================
 ŞİRKET BİLGİLERİ
@@ -465,6 +466,20 @@ S: "Üretim tarihi nasıl bulurum?" → "Üretim tarihi palet etiketinde bulunur
 
 Genel sorular için: kullanıcının ne ihtiyacı varsa onu karşıla — sıkı kapsam kilidi yok.`;
 
+// Kurumsal görünüm garantisi: model talimata rağmen emoji üretirse,
+// yanıt kullanıcıya gitmeden emoji/süs sembollerini temizle.
+// ✓ (onay), → (ok) ve • (madde) gibi tipografik işaretler korunur.
+function stripEmoji(s) {
+  if (typeof s !== 'string') return s;
+  return s
+    .replace(
+      /[\u{1F000}-\u{1FAFF}\u{2600}-\u{26FF}\u{2B00}-\u{2BFF}\u{1F1E6}-\u{1F1FF}\u{FE0F}\u{200D}\u{20E3}]/gu,
+      ''
+    )
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/[ \t]+$/gm, '');
+}
+
 function setCors(res, allowedOrigin) {
   if (allowedOrigin) {
     res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
@@ -573,6 +588,13 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
+    if (data && Array.isArray(data.content)) {
+      for (const block of data.content) {
+        if (block && block.type === 'text' && typeof block.text === 'string') {
+          block.text = stripEmoji(block.text);
+        }
+      }
+    }
     return res.status(200).json(data);
   } catch (err) {
     console.error('Handler error:', err && err.message);
