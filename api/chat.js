@@ -6,7 +6,8 @@
 // - Tüm arkozgazbeton.com.tr içeriği SYSTEM_PROMPT'a entegre
 // - max_tokens cap + Anthropic prompt caching (cost control)
 
-const MAX_INPUT_LENGTH = 1000;
+const MAX_INPUT_LENGTH = 1000; // kullanıcının yazdığı yeni mesaj sınırı
+const MAX_REPLY_LENGTH = 8000; // asistan yanıtı (model çıktısı) için geniş sınır — geçmişi zehirlememek için
 const MAX_HISTORY = 20;
 const MINUTE = 60_000;
 const DAY = 24 * 60 * MINUTE;
@@ -554,13 +555,19 @@ export default async function handler(req, res) {
     if (!m || typeof m.content !== 'string') {
       return res.status(400).json({ error: 'Geçersiz mesaj formatı.' });
     }
-    if (m.content.length > MAX_INPUT_LENGTH) {
+    if (m.role !== 'user' && m.role !== 'assistant') {
+      return res.status(400).json({ error: 'Geçersiz mesaj rolü.' });
+    }
+    // Uzunluk limiti SADECE kullanıcının yazdığı mesaja uygulanır. Asistan yanıtları
+    // (model çıktısı) uzun olabilir; geçmişte uzun bir cevap olması konuşmayı bloke etmemeli.
+    if (m.role === 'user' && m.content.length > MAX_INPUT_LENGTH) {
       return res
         .status(400)
         .json({ error: `Mesaj çok uzun (en fazla ${MAX_INPUT_LENGTH} karakter).` });
     }
-    if (m.role !== 'user' && m.role !== 'assistant') {
-      return res.status(400).json({ error: 'Geçersiz mesaj rolü.' });
+    // Çok uzun asistan yanıtını sessizce kırp (token/maliyet sınırı), reddetme.
+    if (m.role === 'assistant' && m.content.length > MAX_REPLY_LENGTH) {
+      m.content = m.content.slice(0, MAX_REPLY_LENGTH);
     }
   }
 
