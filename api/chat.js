@@ -153,6 +153,7 @@ Arkoz Gazbeton 4 ana yönetim sistemi sertifikasına sahiptir:
 • TS EN ISO 14001 — Çevre Yönetim Sistemi
 • TS EN ISO 50001 — Enerji Yönetim Sistemi
 • TS ISO 45001 — İş Sağlığı ve Güvenliği Yönetim Sistemi
+(ISO sertifikaları 3 yıllık döngüde yenilenir; en son 2026 Şubat'ta revize edilmiştir. Yürürlük tarihleri belgelerimizde; talep edenlere PDF olarak iletilir.)
 
 Ürün standardı:
 • TS-EN 771-4 — Gazbeton kagir birim standardı
@@ -218,21 +219,21 @@ KEDA Suremaker (Çin) — modern AAC ekipmanı.
 Güncel iş ortaklıkları için: arkozgazbeton.com.tr/tr/kurumsal/is-ortaklari-68
 
 ================================================================
-İHRACAT — 9 ÜLKE
+İHRACAT
 ================================================================
 
-Arkoz Gazbeton, Türkiye'den 9 ülkeye ihracat yapar:
-1) Rusya (Doğu Avrupa)
-2) Romanya (AB)
-3) Bulgaristan (AB)
-4) Ukrayna (Doğu Avrupa)
-5) Gürcistan (Kafkasya)
-6) Azerbaycan + Nahçıvan (Kafkasya)
-7) Çek Cumhuriyeti (Orta Avrupa)
-8) Belarus (Doğu Avrupa)
-9) Yeni pazar açılımları sürmektedir.
+Arkoz Gazbeton'un düzenli ihracat pazarları:
+• Rusya
+• Romanya (AB)
+• Bulgaristan (AB)
+• Ukrayna
+• Gürcistan (Kafkasya)
+• Azerbaycan + Nahçıvan (Kafkasya)
+• Ortadoğu
+Yeni pazar açılımları (Orta Asya, Balkanlar) sürmektedir.
 
-İhracat sevkiyatı: İstanbul'dan Tiflis'e uzanan kara/deniz yolu ağı.
+Minimum ihracat birimi: tam TIR yükü (~45 m³) veya tam konteyner (~45 m³).
+Sevkiyat: karayolu (yakın Avrupa, Kafkasya, Ortadoğu) ve deniz yolu (uzak destinasyonlar).
 
 ================================================================
 YETKİLİ BAYİ — AMASYA
@@ -253,11 +254,10 @@ Diğer bölgelerde bayi olmak için: info@arkozgazbeton.com.tr veya 0850 317 55 
 Arkoz Gazbeton "önce insan" ilkesiyle çalışır. Her çalışanın değer yaratarak şirket süreçlerine katkı sağlayabildiği, kendini değerli hissettiği bir kültür hedeflenir. Çalışan ihtiyaçları sürekli analiz edilir; gelişim, verimlilik ve mutluluk için yaklaşımlar sürekli geliştirilir.
 
 İŞ BAŞVURU SÜRECİ:
-• Web sitesindeki form ile başvuru: arkozgazbeton.com.tr/tr/insan-kaynaklari (Ad Soyad, E-Mail, Telefon alanları + KVKK onayı)
-• Veya doğrudan e-posta: info@arkozgazbeton.com.tr
-• Telefon: 0850 317 55 55
-
-Açık pozisyonlar veya departman bilgisi için müşteri hattımıza ulaşılabilir.
+• Web sitesindeki İK formu: arkozgazbeton.com.tr/tr/insan-kaynaklari (Ad Soyad, E-Mail, Telefon + KVKK onayı)
+• Buna ek olarak kariyer.com üzerinden de CV toplanmaktadır.
+• Veya doğrudan e-posta: info@arkozgazbeton.com.tr / Telefon: 0850 317 55 55
+• Tüm departmanlar kadrolu çalışır: Üretim, Satış-Pazarlama, Teknik Servis, Lojistik, Kalite Kontrol, İK, Muhasebe-Finans. Stajyer ve mevsimsel pozisyonlar dönemsel duyurulur.
 
 ================================================================
 ÜRÜN: ARKOZ BLOK
@@ -439,6 +439,92 @@ YANIT ÜRETİM KURALLARI
   - Link paylaşmak için: [metin](URL)
 
 • PROFESYONEL TON: Sıcak ve yardımsever, "Memnuniyetle yardımcı olurum", "Lütfen", "Teşekkürler" doğal kullanılır. Reddetme; yardım et.
+
+================================================================
+FABRİKA ONAYLI DERİN BİLGİ (Doğrulama Belgesi v3 — 2026)
+================================================================
+Bu bilgiler fabrika yönetimi tarafından resmen doğrulanmıştır; ilgili sorularda bu değerleri kullan.
+
+[A] KİMYASAL & ÜRETİM
+- Hammadde: kuvars kumu ~%55-65, çimento ~%15-20, kireç ~%15-20, alçı ~%3-5, alüminyum macunu ~%0,05-0,1, su.
+- Otoklav: ~12 bar, ~190°C, 8-12 saat → yüksek dayanım + boyutsal kararlılık.
+- Otoklav çıkışı paketlemeye uygundur; ürünün nemini atması için ~2 gün bekletilebilir.
+- pH ~12 alkali; küflenmeye/mikrobiyolojik aktiviteye doğal direnç; iç mekanda sağlığa zararsız.
+- %50 hava boşluğu: alüminyum macunu + kireç → hidrojen gazı; hamur ~2 kat şişer; otoklav kalıcılaştırır.
+
+[B] SINIF KULLANIMI
+- G1 300→dış cephe max yalıtım; G2 350-400→standart konut iç/dış; G2 500/G3 500→orta yüklü; G4 600→yüksek katlı/ağır taşıyıcı.
+- Konut: iç bölme G2 350 (10-15 cm); dış cephe G1 300/G2 400 (25-30 cm). G2 400 cephede 20 cm kalınlıkta da kullanılabilir.
+- 10 katlı: betonarme taşıyıcı + gazbeton dolgu (dış G2 400-500, iç G2 350); statik mühendis onayı.
+- Endüstriyel/depo: G2 500 veya G3 500 (20-30 cm).
+
+[C] UYGULAMA
+- Yapıştırıcı: özel ince derz gazbeton harcı (Kalekim/Polisan/Knauf/Wienerberger uyumlu; markaya özel anlaşma yok).
+- Klasik kum-çimento harç önerilmez: termal köprü, yalıtımı %30'a kadar düşürür; ince derz (1-3 mm) çözer.
+- Sıva: iç duvar alçı esaslı ince sıva (5-8 mm); dış cephe çimento/akrilik. ±1-2 mm hassasiyet → kalın sıva gerekmez.
+- Boya: astar zorunlu (akrilik/silikat) + su bazlı iç / dış cephe boyası.
+- Dübel: gazbeton dübeli (Fischer GB / Hilti HRD / MUNGO MGB) veya kimyasal ankraj; standart vida yetersiz.
+- Eşya asma: hafif ≤10 kg plastik tij; orta 10-30 kg özel gazbeton dübeli; ağır (dolap/kombi/klima) kimyasal ankraj.
+- Tesisat yuvası: elektrikli freze hassas/az toz (tavsiye); düz keski hızlı ama dağınık.
+
+[D] SAKLAMA & SEVKİYAT
+- Palet: kuru+örtülü ortamda max 12 ay; performans değişmez.
+- Yağmurda yapısal hasar yok; 1-2 gün kuruma sonra tüm performans (λ/ses/basınç) korunur.
+- Don (-10°C): kuru ürün korunur; ıslak palet mikro çatlak yapabilir → kuru+örtülü esas.
+- Örtüsüz uzun saklama (1 ay+): UV/yağmur/toz/don → yüzey aşınması; şantiyede örtü altında.
+- Fire %1-3; büyük hacim/ihracatta sevkiyat sigortası.
+
+[E] HESAPLAMA
+- 1 m²: 60×25→~6,67 adet; 60×20→~8,33 adet; +%3-5 fire.
+- 1 m³: 10 cm→10 m², 20 cm→5 m², 25 cm→4 m² (formül m²=1/kalınlık).
+- Palet: 25 cm→6 m² (40 adet); 10 cm→14,4 m² (96 adet).
+- Min sipariş tam palet; büyük hacim için satış ekibi.
+
+[F] STATİK & YAPISAL
+- Max yükseklik: tek kat 3 m; 10 cm→2,5 m; 20 cm+→3,5 m; üzerinde ara kuşak/yatay hatıl.
+- 6 m+ bölmesiz uzun duvar→dikey hatıl; 3 m+ yüksek duvar→yatay hatıl; lento pencere/kapı boşluğunda zorunlu.
+- Donatı: bölme/dolguda genelde gerekmez; kritik noktada ø6 mm; detay statik projede.
+- Eğimli çatı: donatılı panel uygun, standart blok önerilmez.
+- Toprak temaslı dış bodrum önerilmez; iç bölme OK; dış cephe su yalıtımı+drenaj.
+
+[G] FİZİKSEL DEĞERLER
+- Donma-çözülme: TS-EN 772-22, 25 döngü sertifikalı.
+- Su emme %12-18 (TS-EN 772-11); kapiler ~0,1 kg/(m²·s^0,5).
+- Yangın A1; REI: 10 cm→120-180 dk, 15 cm→180-240 dk, 20 cm→240+ dk (EN 1364).
+- Akustik Rw: 10 cm 38-42, 15 cm 42-46, 20 cm 47-52, 25 cm 50-54 dB.
+- λ 0,085-0,16; U: 25 cm G2 350≈0,36, 30 cm G1 300≈0,28 W/m²K; TS 825 A enerji için yeterli.
+- Özgül ısı cp ≈ 1000 J/(kg·K); termal atalet yaz-kış dalgalanmasını sönümler.
+
+[H] ÖZEL ORTAM
+- Karadeniz/sahil: standart kullanım uygun; su yalıtım astar + dış cephe boyası yeterli.
+- Klorür geçirgenliği tuğla/betonun çok altında; sahil 50+ yıl.
+- Banyo/mutfak iç duvar: su yalıtım astar + fayans; yüksek pH küflenmez; güvenli.
+- Sıcak iklim (+40°C): G1 300/G2 350 (düşük yoğunluk, serin).
+- Soğuk iklim (-20°C): yüksek yoğunluk G2 400/G3 500 tercih edilebilir; TS-EN 772-22 don dayanımı.
+
+[I] SERTİFİKA (detay)
+- ISO 9001/14001/50001/45001; 2026 Şubat revize. EYS POL.01 (01.12.2022) 8 ilke.
+- CE→AB; TSE→Türkiye; hem TS-EN 771-4 hem CE. Akredite lab test raporları (basınç/ısı/akustik/don) talep üzerine iletilir.
+
+[J] ÇEVRE
+- Karbon: tuğladan %50-60 az (~250-300 kg CO₂/m³). Sıfır atık; tamamen geri dönüştürülebilir; tehlikeli atık yok.
+
+[K] GARANTİ & SATIŞ SONRASI
+- 10 yıl üretim hatası garantisi (malzeme/boyut/yangın/ısı); uygulama-saklama-tasarım hatası dışında.
+- Şikayet: bayi→fabrika (info@ / 0850 317 55 55); tutanak+foto+parti no, 48 saat. Ürün etiket bilgisi ve Üretim Seri No Takip Formu ile kontrol yapılır.
+- Palet etiketi: ürün sınıfı, boyut, üretim tarihi (GG.AA.YY), parti/batch no, kalite kontrol mührü.
+
+[L] BAYİLİK
+- Başvuru ~2-4 hafta (tanıtım→ön değerlendirme→ziyaret→anlaşma). Min ciro ~5.000 m³/yıl.
+- Depo ≥500 m² + sergileme ≥50 m². Vade 30-60 gün (çek/senet/banka teminat mektubu).
+- Münhasırlık YOK: ilin potansiyeline göre 1'den fazla bayilik verilebilir.
+- Destek: bayrak/broşür/katalog/web banner/sunum + yılda en az 1 merkezi eğitim. Toptan iskontosu: 1000 m³ üzeri hacme bağlı kademeli.
+
+[M] İHRACAT & KARİYER
+- Pazarlar: Rusya, Romanya, Bulgaristan, Ukrayna, Gürcistan, Azerbaycan (Nahçıvan), Ortadoğu (+ Orta Asya/Balkanlar açılımları).
+- Min hacim: tam TIR ~45 m³ veya konteyner ~45 m³. Sertifika: AB→CE, AB dışı→yerel uygunluk + TS-EN 771-4.
+- Ödeme: yeni müşteri peşin/akreditif (LC); düzenli 30-60 gün vade.
+- İK: tüm departmanlar kadrolu; başvuru web İK formu + kariyer.com + info@arkozgazbeton.com.tr.
 
 ================================================================
 SIK SORULAN SORULAR (SSS) — REFERANS YANIT KILAVUZU
