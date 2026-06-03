@@ -30,65 +30,83 @@
       <div class="msg ai">Merhaba! Ben Arkoz Gazbeton'un asistanıyım. Size nasıl yardımcı olabilirim?</div>
     </div>
     <div id="input-area">
-      <input id="user-input" type="text" placeholder="Mesajınızı yazın..." />
+      <input id="user-input" type="text" maxlength="1000" placeholder="Mesajınızı yazın..." />
       <button id="send-btn">Gönder</button>
     </div>
   </div>
   <div id="status"></div>
   <script>
     const WORKER_URL = 'https://arkoz-ai.vercel.app/api/chat';
-    const messages = document.getElementById('messages');
+    const MAX_HISTORY = 18; // sunucu cap'i (20) altında kal; yeni user+assistant çiftine yer bırak
+    const messagesEl = document.getElementById('messages');
     const input = document.getElementById('user-input');
     const btn = document.getElementById('send-btn');
-    const status = document.getElementById('status');
-    const history = [];
+    const statusEl = document.getElementById('status');
+    let history = [];
+    let busy = false;
+
     function addMsg(text, role) {
       const div = document.createElement('div');
       div.className = 'msg ' + (role === 'user' ? 'user' : 'ai');
       div.textContent = text;
-      messages.appendChild(div);
-      messages.scrollTop = messages.scrollHeight;
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
       return div;
     }
+
     async function send() {
+      if (busy) return; // uçuştaki istek varken yeniden gönderme
       const text = input.value.trim();
       if (!text) return;
-      input.value = '';
+      if (text.length > 1000) {
+        statusEl.textContent = 'Mesaj çok uzun (en fazla 1000 karakter).';
+        statusEl.className = 'error';
+        return;
+      }
+      busy = true;
       btn.disabled = true;
-      status.textContent = '';
-      status.className = '';
+      input.value = '';
+      statusEl.textContent = '';
+      statusEl.className = '';
       addMsg(text, 'user');
-      history.push({ role: 'user', content: text });
       const typing = addMsg('Yazıyor...', 'ai');
       typing.classList.add('typing');
+      // Kullanıcı mesajını geçmişe HENÜZ ekleme — istek başarısız olursa geçmiş zehirlenmesin.
+      const outgoing = [...history, { role: 'user', content: text }].slice(-MAX_HISTORY);
       try {
         const res = await fetch(WORKER_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: history }),
+          body: JSON.stringify({ messages: outgoing }),
         });
         const data = await res.json();
-        if (data.error) {
+        if (!res.ok || data.error) {
           typing.remove();
-          status.textContent = 'Hata: ' + (data.error.message || JSON.stringify(data.error));
-          status.className = 'error';
+          const msg = typeof data.error === 'string'
+            ? data.error
+            : (data.error && data.error.message) || 'Bir hata oluştu.';
+          statusEl.textContent = 'Hata: ' + msg;
+          statusEl.className = 'error';
         } else {
-          const reply = data.content[0].text;
+          const block = (data.content || []).find((b) => b && b.type === 'text' && b.text);
+          const reply = block ? block.text : 'Üzgünüm, yanıt alınamadı, lütfen tekrar deneyin.';
           typing.textContent = reply;
           typing.classList.remove('typing');
-          history.push({ role: 'assistant', content: reply });
-          status.textContent = 'Bağlantı başarılı';
-          status.className = 'ok';
+          // SADECE başarıda geçmişe yaz (başarısızlık geçmişi bozmaz).
+          history = [...history, { role: 'user', content: text }, { role: 'assistant', content: reply }].slice(-MAX_HISTORY);
+          statusEl.textContent = 'Bağlantı başarılı';
+          statusEl.className = 'ok';
         }
       } catch (err) {
         typing.remove();
-        status.textContent = 'Bağlantı hatası: ' + err.message;
-        status.className = 'error';
+        statusEl.textContent = 'Bağlantı hatası: ' + err.message;
+        statusEl.className = 'error';
       }
+      busy = false;
       btn.disabled = false;
     }
     btn.addEventListener('click', send);
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') send(); });
   </script>
 </body>
 </html>

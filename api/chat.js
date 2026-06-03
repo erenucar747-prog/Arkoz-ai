@@ -51,9 +51,15 @@ function maybeGc(map, windowMs) {
 }
 
 function getIp(req) {
+  // Spoof'a karşı: Vercel x-real-ip'i gerçek istemci IP'sine set eder (client gönderse
+  // de ezilir). x-forwarded-for'da gerçek IP SON hop olarak eklenir; ilk değil son alınır.
+  const real = req.headers['x-real-ip'];
+  if (typeof real === 'string' && real.trim()) return real.trim();
   const fwd = req.headers['x-forwarded-for'];
-  if (typeof fwd === 'string' && fwd) return fwd.split(',')[0].trim();
-  if (req.headers['x-real-ip']) return req.headers['x-real-ip'];
+  if (typeof fwd === 'string' && fwd.trim()) {
+    const parts = fwd.split(',').map((s) => s.trim()).filter(Boolean);
+    if (parts.length) return parts[parts.length - 1];
+  }
   return req.socket?.remoteAddress || 'unknown';
 }
 
@@ -532,7 +538,7 @@ export default async function handler(req, res) {
   // sessizce filtrele ki eski tarayıcılar da çalışsın.
   messages = messages.filter((m, i, arr) => {
     if (!m || typeof m.content !== 'string') return true;
-    if (m.role === 'user' && m.content.startsWith('[SISTEM TALIMATLARI')) return false;
+    if (m.role === 'user' && i < arr.length - 1 && m.content.startsWith('[SISTEM TALIMATLARI')) return false;
     if (
       m.role === 'assistant' &&
       i > 0 &&
@@ -548,9 +554,11 @@ export default async function handler(req, res) {
   if (messages.length === 0) {
     return res.status(400).json({ error: 'Geçersiz istek.' });
   }
+  // Geçmiş çok uzunsa REDDETME — son MAX_HISTORY mesajı tut (konuşma kilitlenmesin).
   if (messages.length > MAX_HISTORY) {
-    return res.status(400).json({ error: 'Konuşma geçmişi çok uzun.' });
+    messages = messages.slice(-MAX_HISTORY);
   }
+
   for (const m of messages) {
     if (!m || typeof m.content !== 'string') {
       return res.status(400).json({ error: 'Geçersiz mesaj formatı.' });
@@ -558,8 +566,11 @@ export default async function handler(req, res) {
     if (m.role !== 'user' && m.role !== 'assistant') {
       return res.status(400).json({ error: 'Geçersiz mesaj rolü.' });
     }
-    // Uzunluk limiti SADECE kullanıcının yazdığı mesaja uygulanır. Asistan yanıtları
-    // (model çıktısı) uzun olabilir; geçmişte uzun bir cevap olması konuşmayı bloke etmemeli.
+    // Boş/yalnızca-boşluk kullanıcı mesajı: Anthropic 400'ler → dostça 400 ver (502'ye dönmesin).
+    if (m.role === 'user' && m.content.trim() === '') {
+      return res.status(400).json({ error: 'Lütfen bir mesaj yazın.' });
+    }
+    // Uzunluk limiti SADECE kullanıcının yazdığı mesaja uygulanır.
     if (m.role === 'user' && m.content.length > MAX_INPUT_LENGTH) {
       return res
         .status(400)
@@ -571,7 +582,23 @@ export default async function handler(req, res) {
     }
   }
 
-  const cleanMessages = messages.map((m) => ({ role: m.role, content: m.content }));
+  // Anthropic kontratını garanti et (bozuk/zehirli geçmiş 502 yerine kendini onarsın):
+  // boş asistan turlarını at, baştaki asistan mesajlarını kırp, ardışık aynı-rolü birleştir.
+  // Sonuç: ilk mesaj 'user', roller değişir, son mesaj 'user'.
+  const cleanMessages = [];
+  for (const m of messages) {
+    if (m.role === 'assistant' && m.content.trim() === '') continue;
+    if (cleanMessages.length === 0 && m.role !== 'user') continue;
+    const last = cleanMessages[cleanMessages.length - 1];
+    if (last && last.role === m.role) {
+      last.content = `${last.content}\n${m.content}`.slice(0, MAX_REPLY_LENGTH);
+    } else {
+      cleanMessages.push({ role: m.role, content: m.content });
+    }
+  }
+  if (cleanMessages.length === 0 || cleanMessages[cleanMessages.length - 1].role !== 'user') {
+    return res.status(400).json({ error: 'Geçersiz istek.' });
+  }
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -607,6 +634,16 @@ export default async function handler(req, res) {
         if (block && block.type === 'text' && typeof block.text === 'string') {
           block.text = stripEmoji(block.text);
         }
+      }
+      // stripEmoji bir yanıtı (ör. emoji-only) boşaltmış olabilir. Boş içerik hem
+      // kullanıcıya boş baloncuk gösterir hem sonraki turda API'yi 400'ler → garanti et.
+      const hasText = data.content.some(
+        (b) => b && b.type === 'text' && typeof b.text === 'string' && b.text.trim() !== ''
+      );
+      if (!hasText) {
+        data.content = [
+          { type: 'text', text: 'Bir sorun oluştu, sorunuzu tekrar yazar mısınız?' },
+        ];
       }
     }
     return res.status(200).json(data);
